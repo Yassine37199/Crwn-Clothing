@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route} from 'react-router-dom';
 import './App.css';
 import Homepage from './Pages/homepage/homepage.component';
 
@@ -6,10 +6,7 @@ import Homepage from './Pages/homepage/homepage.component';
 function App() {
   return (
     <div className="App">
-      <Routes>
-        <Route path='/*' element={ <Homepage />} />
-      </Routes>
-      
+        <Route exact path='/' component={Homepage} /> 
     </div>
   );
 }
