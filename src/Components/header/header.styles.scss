@@ -1,0 +1,32 @@
+@font-face {
+    font-family: "Futura";
+    src: url("../../Assets/Fonts/FuturaPTMedium.otf") format("opentype"),
+    }
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Futura' , sans-serif;
+
+    &__logo {
+        padding: 15px 20px;
+    }
+
+    &__nav {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 15px 25px;
+    }
+
+    &__nav-item {
+        font-weight: 900;
+        line-height: 60px;
+        font-size: 16px;
+        text-decoration: none;
+        color: #000;
+        margin-right: 17px;
+    }
+}
