@@ -5,6 +5,7 @@ import FormInput from '../form-input/form-input.component';
 import './sign-in.styles.scss';
 
 
+
 class SignIn extends Component {
 
     constructor(props) {
@@ -35,28 +36,22 @@ class SignIn extends Component {
     render() {
         return(
             <div className='sign-in'>
-                <h2 className='sign-in__title'>I already have an account</h2>
-                <span>Sign in with your email and password </span>
-
-                <form onSubmit={e => this.handleSubmit(e)}>
-                    <FormInput 
-                        type="email" 
-                        name='email' 
-                        value={this.state.email} 
-                        label = 'Email'
-                        handleChange={this.handleChange} 
-                        required />
-                        
-                    <FormInput 
-                        type='password' 
-                        name='password'
-                        value={this.state.password} 
-                        label = 'Password'
-                        handleChange={this.handleChange}
-                        required />
-
-                    <CustomButton type='submit'>Submit Form</CustomButton>
-                </form>
+                <FormInput 
+                    type="email"
+                    name="email"
+                    value={this.state.email}
+                    label="Email Adress :"
+                    handleChange={this.handleChange}
+                    required
+                />
+                <FormInput 
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    label="Password :"
+                    handleChange={this.handleChange}
+                    required
+                />
             </div>
         )
     }
