@@ -3,11 +3,11 @@ import SignIn from '../../Components/sign-in/sign-in.component';
 import { Link } from 'react-router-dom';
 import {ReactComponent as Logo} from '../../Assets/crown.svg'
 
-import './sign-in-out.styles.scss'
+import './sign-in-up.styles.scss'
 import { Route, Switch } from 'react-router-dom';
 
 
-const SignInOut = () => (
+const SignInUp = () => (
     
     <div className='container'>
           <div className='sign-in-out'> 
@@ -16,11 +16,11 @@ const SignInOut = () => (
                     <Link className="sign-in-out__link">JOIN</Link>
                     <Link to='/identity/login' className="sign-in-out__link">SIGN IN</Link>
                 </div>
-            <Switch>
+            <Switch> 
                 <Route path='/identity/login' component={SignIn} />
             </Switch>
         </div>
     </div>
 )
 
-export default SignInOut;
+export default SignInUp;

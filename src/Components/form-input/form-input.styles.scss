@@ -3,6 +3,10 @@
 
 .form {
 
+    &__group {
+        width: 70%;
+    }
+
     &__input {
         background: none;
         font-size: 18px;
@@ -17,10 +21,10 @@
         &:focus {
             outline: none;
         }
-    }
 
-    input[type='password'] {
-        letter-spacing: .3em;
+        &[type='password'] {
+            letter-spacing: .3em;
+        }
     }
 
     &__label {

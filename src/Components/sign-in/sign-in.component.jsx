@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
 
@@ -52,6 +53,15 @@ class SignIn extends Component {
                     handleChange={this.handleChange}
                     required
                 />
+                <CustomButton type="submit" handleSubmit={this.handleSubmit}> SIGN IN</CustomButton>
+                <Link to='/' className='sign-in__forgot-pswd'>forgot password ?</Link>
+                <p className='sign-in__subtitle'> OR SIGN IN WITH ...</p>
+                <div className='sign-in__options'>
+                    <CustomButton>Google</CustomButton>
+                    <CustomButton>Apple</CustomButton>
+                    <CustomButton>Facebook</CustomButton>
+                    <CustomButton>Twitter</CustomButton>
+                </div>
             </div>
         )
     }

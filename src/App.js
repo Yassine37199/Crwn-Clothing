@@ -3,7 +3,7 @@ import './App.css';
 import Header from './Components/header/header.component';
 import Homepage from './Pages/homepage/homepage.component';
 import ShopPage from './Pages/shop/shop.component';
-import SignInOut from './Pages/sign-in-out/sign-in-out.component';
+import SignInUp from './Pages/sign-in-up/sign-in-up.component';
 
 
 function App() {
@@ -13,7 +13,7 @@ function App() {
       <Switch>
           <Route exact path='/' component={Homepage} /> 
           <Route exact path='/shop' component={ShopPage} />
-          <Route exact path='/identity/login' component={SignInOut} /> 
+          <Route exact path='/identity/login' component={SignInUp} /> 
         </Switch>
     </div>
   );

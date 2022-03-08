@@ -1,18 +1,22 @@
 .custom-button {
     min-width: 165px;
-    width: auto;
+    width: 70%;
     height: 50px;
-    letter-spacing: 0.5px;
-    line-height: 50px;
+    letter-spacing: 2.5px;
+    line-height: 24px;
     padding: 0 35px 0 35px;
-    font-size: 15px;
-    background-color: black;
+    font-size: 16px;
+    background-color: #2d2d2d;
     color: white;
     text-transform: uppercase;
-    font-weight: bolder;
+    font-weight: 700;
     font-family: inherit;
     border: none;
+    border-radius: 7px;
+    margin-top: 15px;
+    margin-left: 15px;
     cursor: pointer;
+    transition: all .2s;
 
     &:hover {
         background-color: white;
