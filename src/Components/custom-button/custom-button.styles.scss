@@ -1,4 +1,7 @@
 .custom-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     min-width: 165px;
     width: 70%;
     height: 50px;
@@ -23,4 +26,11 @@
         color : black;
         border: 1px solid black;
     }
+}
+
+.brand {
+    width: 40%;
+    color: #2d2d2d;
+    background-color: #fff;
+    border: 1px solid #808282;
 }

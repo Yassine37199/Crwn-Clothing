@@ -4,9 +4,9 @@ import './custom-button.styles.scss';
 
 
 
-const CustomButton = ({children , handleSubmit , ...otherButtonProps}) => (
+const CustomButton = ({children , handleSubmit , brand , ...otherButtonProps}) => (
     <button 
-        className='custom-button' 
+        className={`${brand ? 'brand' : ''} custom-button`} 
         {...otherButtonProps}
         onClick={handleSubmit}
         >

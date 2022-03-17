@@ -3,6 +3,11 @@ import { Link } from 'react-router-dom';
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
 
+import {ReactComponent as GoogleLogo} from '../../Assets/Logos/google.svg'
+import {ReactComponent as AppleLogo} from '../../Assets/Logos/apple.svg'
+import {ReactComponent as TwitterLogo} from '../../Assets/Logos/twitter.svg'
+import {ReactComponent as FacebookLogo} from '../../Assets/Logos/facebook.svg'
+
 import './sign-in.styles.scss';
 
 
@@ -57,10 +62,22 @@ class SignIn extends Component {
                 <Link to='/' className='sign-in__forgot-pswd'>forgot password ?</Link>
                 <p className='sign-in__subtitle'> OR SIGN IN WITH ...</p>
                 <div className='sign-in__options'>
-                    <CustomButton>Google</CustomButton>
-                    <CustomButton>Apple</CustomButton>
-                    <CustomButton>Facebook</CustomButton>
-                    <CustomButton>Twitter</CustomButton>
+                    <CustomButton brand={true}>
+                        <GoogleLogo className='sign-in__brand-logo' />
+                        Google
+                    </CustomButton>
+                    <CustomButton brand={true}>
+                        <AppleLogo className='sign-in__brand-logo' />
+                        Apple
+                    </CustomButton>
+                    <CustomButton brand={true}>
+                        <FacebookLogo className='sign-in__brand-logo' />
+                        Facebook
+                    </CustomButton>
+                    <CustomButton brand={true}>
+                        <TwitterLogo className='sign-in__brand-logo' />
+                        Twitter
+                    </CustomButton>
                 </div>
             </div>
         )
