@@ -9,6 +9,7 @@ import {ReactComponent as TwitterLogo} from '../../Assets/Logos/twitter.svg'
 import {ReactComponent as FacebookLogo} from '../../Assets/Logos/facebook.svg'
 
 import './sign-in.styles.scss';
+import { signInWithGoogle } from '../../firebase/firebase.utils';
 
 
 
@@ -62,7 +63,9 @@ class SignIn extends Component {
                 <Link to='/' className='sign-in__forgot-pswd'>forgot password ?</Link>
                 <p className='sign-in__subtitle'> OR SIGN IN WITH ...</p>
                 <div className='sign-in__options'>
-                    <CustomButton brand={true}>
+                    <CustomButton 
+                        brand={true}
+                        handleSubmit = {signInWithGoogle}>
                         <GoogleLogo className='sign-in__brand-logo' />
                         Google
                     </CustomButton>
