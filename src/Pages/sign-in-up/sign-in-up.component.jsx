@@ -5,22 +5,35 @@ import {ReactComponent as Logo} from '../../Assets/crown.svg'
 
 import './sign-in-up.styles.scss'
 import { Route, Switch } from 'react-router-dom';
+import SignUp from '../../Components/sign-up/sign-up.component';
+import { withRouter } from 'react-router-dom';
 
 
-const SignInUp = () => (
-    
-    <div className='container'>
-          <div className='sign-in-out'> 
-            <Logo className="sign-in-out__logo" />
+const SignInUp = (history , match) => {
+
+    const pathname = history.location.pathname
+
+    return( 
+            
+            <div className='container'>
+            <Logo className="logo" />
+            <div className='sign-in-out'> 
+           
                 <div className='sign-in-out__nav'>
-                    <Link className="sign-in-out__link">JOIN</Link>
-                    <Link to='/identity/login' className="sign-in-out__link">SIGN IN</Link>
+                    <Link to='/identity/register' className={`${pathname == '/identity/register' ? 'selected' : ''} sign-in-out__link`}>JOIN</Link>
+                    <Link to='/identity/login' className={`${pathname == '/identity/login' ? 'selected' : ''} sign-in-out__link`}>SIGN IN</Link>
                 </div>
             <Switch> 
                 <Route path='/identity/login' component={SignIn} />
+                <Route path='/identity/register' component={SignUp} />
             </Switch>
         </div>
     </div>
-)
+    )
 
-export default SignInUp;
+    
+    
+  
+}
+
+export default withRouter(SignInUp);

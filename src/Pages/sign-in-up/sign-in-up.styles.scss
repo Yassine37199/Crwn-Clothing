@@ -5,9 +5,17 @@
 
 .container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    
+}
+
+.logo {
+    width: 120px;
+    height: 109px;
+    margin-top: 20px;
 }
 
 .sign-in-out {
@@ -27,16 +35,13 @@
     font-weight: 700;
     line-height: 24px;
     letter-spacing: 1.5px;
+    padding-bottom: 70px;
 
     & > * {
         margin-top: 20px;
     }
 
-    &__logo {
-        width: 90px;
-        height: 79px;
-        margin-top: 20px;
-    }
+   
 
     &__nav {
         width: 100%;
@@ -57,7 +62,11 @@
         color: #222;
 
         &:hover {
-            border-bottom: 2px solid #222;
+            color: #808282;
         }
     }
+}
+
+.selected {
+    border-bottom: 2px solid #222;
 }
