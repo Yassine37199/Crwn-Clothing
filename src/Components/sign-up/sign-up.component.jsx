@@ -8,6 +8,7 @@ import {ReactComponent as TwitterLogo} from '../../Assets/Logos/twitter.svg'
 import {ReactComponent as FacebookLogo} from '../../Assets/Logos/facebook.svg'
 
 import './sign-up.styles.scss'
+import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
 
 
 
@@ -34,6 +35,31 @@ class SignUp extends Component {
             [name] : value
         })
     }
+
+    handleSubmit = async e => {
+        e.preventDefault();
+        const {displayName , email , password , confirmPassword} = this.state;
+        if(password !== confirmPassword) {
+            alert("passwords don't match");
+            return;
+        }
+
+        try {
+            const {user} = await auth.createUserWithEmailAndPassword(email , password);
+
+            await createUserProfileDocument(user , {displayName})
+            this.setState({
+                displayName : '',
+                email : '',
+                password : '',
+                confirmPassword : ''
+            })
+        }
+
+        catch(error) {
+            console.log(error)
+        }
+    }   
 
 
     render() {

@@ -6,7 +6,8 @@ import Homepage from './Pages/homepage/homepage.component';
 import ShopPage from './Pages/shop/shop.component';
 import SignInUp from './Pages/sign-in-up/sign-in-up.component';
 
-import {auth} from './firebase/firebase.utils'
+import {auth, createUserProfileDocument, firestore} from './firebase/firebase.utils'
+import { withRouter } from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -23,10 +24,27 @@ class App extends React.Component {
   UnsubscribeFromAuth = null;
 
   componentDidMount() {
-    this.UnsubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({
-        currentUser : user
-      }, () => console.log(this.state.currentUser))
+    this.UnsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
+
+      if(userAuth) {
+
+        const userRef = await createUserProfileDocument(userAuth);
+
+        console.log(userRef)
+
+        userRef.onSnapshot(snapshot => {
+            this.setState({
+              currentUser : {
+                id : snapshot.id,
+                ...snapshot.data()
+              }
+            })
+        })
+      }
+
+      else this.setState({
+        currentUser : userAuth
+      })
     })
   }
 
@@ -37,9 +55,15 @@ class App extends React.Component {
 
   render(){
 
+    const url = this.props.history.location.pathname;
+
     return (
       <div className="App">
-        <Header currentUser={this.state.currentUser}/>
+        {   
+            !(url.includes('/identity')) ?
+            <Header currentUser={this.state.currentUser}/>
+            : null
+        }
         <Switch>
             <Route exact path='/' component={Homepage} /> 
             <Route exact path='/shop' component={ShopPage} />
@@ -52,4 +76,4 @@ class App extends React.Component {
   
 }
 
-export default App;
+export default withRouter(App);

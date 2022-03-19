@@ -15,10 +15,12 @@ const SignInUp = (history , match) => {
 
     return( 
             
-            <div className='container'>
-            <Logo className="logo" />
+        <div className='container'>
+            <Link to='/'>
+                <Logo className="logo" />
+            </Link>
             <div className='sign-in-out'> 
-           
+        
                 <div className='sign-in-out__nav'>
                     <Link to='/identity/register' className={`${pathname === '/identity/register' ? 'selected' : ''} sign-in-out__link`}>JOIN</Link>
                     <Link to='/identity/login' className={`${pathname === '/identity/login' ? 'selected' : ''} sign-in-out__link`}>SIGN IN</Link>
