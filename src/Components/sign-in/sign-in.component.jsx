@@ -9,7 +9,7 @@ import {ReactComponent as TwitterLogo} from '../../Assets/Logos/twitter.svg'
 import {ReactComponent as FacebookLogo} from '../../Assets/Logos/facebook.svg'
 
 import './sign-in.styles.scss';
-import { signInWithGoogle } from '../../firebase/firebase.utils';
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
 
 
 
@@ -24,12 +24,25 @@ class SignIn extends Component {
         }
     }
 
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
-        this.setState({
-            email : '',
-            password : ''
-        })    
+
+        const {email , password} = this.state;
+
+        console.log(email , password)
+
+        try {
+            await auth.signInWithEmailAndPassword(email , password);
+            this.setState({
+                email : '',
+                password : ''
+            }) 
+        }
+        catch(error) {
+            console.log(error)
+        }
+        
+         
     }
 
     handleChange = e => {
