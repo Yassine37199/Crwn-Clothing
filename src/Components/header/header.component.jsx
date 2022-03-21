@@ -6,10 +6,13 @@ import {ReactComponent as Logo} from '../../Assets/crown.svg'
 
 import './header.styles.scss'
 import { connect } from 'react-redux';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+import { toggleCart } from '../../redux/cart/cart.actions';
 
 
 
-const Header = ({currentUser}) => (
+const Header = ({currentUser , hidden , toggleCart}) => (
     <div className='header'>
         <Link to='/' className='header__logo-box'>
             <Logo className='header__logo' />
@@ -25,14 +28,21 @@ const Header = ({currentUser}) => (
                 :
                 <Link to='/identity/login' className='header__nav-item'>SIGN IN</Link>
             }
-            
+            <div onClick={toggleCart}>
+                <CartIcon />
+            </div>
         </div>
+        {hidden ? null : <CartDropdown />}
     </div>
 )
 
 const mapStateToProps = (state) => ({
-    currentUser : state.user.currentUser
+    currentUser : state.user.currentUser,
+    hidden : state.cart.hidden
 })
 
+const mapDispatchToProps = dispatch => ({
+    toggleCart : () => dispatch(toggleCart()) 
+})
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps , mapDispatchToProps)(Header);
