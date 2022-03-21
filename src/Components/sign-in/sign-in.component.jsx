@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
 
+import {Redirect} from 'react-router-dom'
+
 import {ReactComponent as GoogleLogo} from '../../Assets/Logos/google.svg'
 import {ReactComponent as AppleLogo} from '../../Assets/Logos/apple.svg'
 import {ReactComponent as TwitterLogo} from '../../Assets/Logos/twitter.svg'
@@ -33,6 +35,7 @@ class SignIn extends Component {
 
         try {
             await auth.signInWithEmailAndPassword(email , password);
+            <Redirect to="/" />
             this.setState({
                 email : '',
                 password : ''

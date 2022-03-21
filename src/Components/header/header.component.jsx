@@ -5,6 +5,7 @@ import {auth} from '../../firebase/firebase.utils'
 import {ReactComponent as Logo} from '../../Assets/crown.svg'
 
 import './header.styles.scss'
+import { connect } from 'react-redux';
 
 
 
@@ -19,15 +20,21 @@ const Header = ({currentUser}) => (
 
 
             {   
-                currentUser ? 
-                <div onClick={() => auth.signOut()} className='header__nav-item'>SIGN OUT</div>
+                currentUser ?
+                (<div onClick={() => {
+                    auth.signOut();
+                    window.location.reload()}} className='header__nav-item'>SIGN OUT</div>)
                 :
-                <Link to='/identity/login' className='header__nav-item'>SIGN IN</Link>
+                (<Link to='/identity/login' className='header__nav-item'>SIGN IN</Link>)
             }
             
         </div>
     </div>
-)
+);
+
+const mapStateToProps = state => ({ 
+    currentUser : state.user.currentUser
+});
 
 
-export default Header;
+export default connect(mapStateToProps)(Header);

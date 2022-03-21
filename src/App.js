@@ -8,17 +8,12 @@ import SignInUp from './Pages/sign-in-up/sign-in-up.component';
 
 import {auth, createUserProfileDocument, firestore} from './firebase/firebase.utils'
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {setCurrentUser} from './redux/user/user.actions'
+import { Redirect } from 'react-router-dom';
 
 
 class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      currentUser : null
-    }
-  }
 
 
   UnsubscribeFromAuth = null;
@@ -31,18 +26,14 @@ class App extends React.Component {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapshot => {
-            this.setState({
-              currentUser : {
-                id : snapshot.id,
-                ...snapshot.data()
-              }
-            })
-        })
+           this.props.setCurrentUser({
+             id : snapshot.id,
+             ...snapshot.data()
+           });
+        });
       }
 
-      else this.setState({
-        currentUser : userAuth
-      })
+      setCurrentUser(userAuth)
     })
   }
 
@@ -59,13 +50,14 @@ class App extends React.Component {
       <div className="App">
         {   
             !(url.includes('/identity')) ?
-            <Header currentUser={this.state.currentUser}/>
+            <Header />
             : null
         }
         <Switch>
             <Route exact path='/' component={Homepage} /> 
             <Route exact path='/shop' component={ShopPage} />
-            <Route path='/identity' component={SignInUp} /> 
+            <Route path='/identity' 
+                  render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInUp />)} /> 
           </Switch>
       </div>
     );
@@ -74,4 +66,14 @@ class App extends React.Component {
   
 }
 
-export default withRouter(App);
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser : user => dispatch(setCurrentUser(user))
+})
+
+
+const mapStateToProps = state => ({
+  currentUser : state.user.currentUser
+})
+
+
+export default withRouter(connect(mapStateToProps , mapDispatchToProps)(App));
