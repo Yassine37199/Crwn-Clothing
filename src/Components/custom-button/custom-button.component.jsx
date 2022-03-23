@@ -4,9 +4,9 @@ import './custom-button.styles.scss';
 
 
 
-const CustomButton = ({children , handleSubmit , brand , ...otherButtonProps}) => (
+const CustomButton = ({children , handleSubmit , inverted , brand , ...otherButtonProps}) => (
     <button 
-        className={`${brand ? 'brand' : ''} custom-button`} 
+        className={`${inverted ? 'inverted' : ''} ${brand ? 'brand' : ''} custom-button`} 
         {...otherButtonProps}
         onClick={handleSubmit}
         >

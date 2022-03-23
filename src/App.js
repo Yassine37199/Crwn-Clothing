@@ -10,6 +10,7 @@ import {auth, createUserProfileDocument, firestore} from './firebase/firebase.ut
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {setCurrentUser} from './redux/user/user.actions'
+
 import { Redirect } from 'react-router-dom';
 
 
@@ -19,6 +20,9 @@ class App extends React.Component {
   UnsubscribeFromAuth = null;
 
   componentDidMount() {
+
+    const {setCurrentUser} = this.props;
+
     this.UnsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
 
       if(userAuth) {
@@ -26,14 +30,14 @@ class App extends React.Component {
         const userRef = await createUserProfileDocument(userAuth);
 
         userRef.onSnapshot(snapshot => {
-           this.props.setCurrentUser({
-             id : snapshot.id,
-             ...snapshot.data()
-           });
-        });
+           setCurrentUser({
+                id : snapshot.id,
+                ...snapshot.data()
+            })
+        })
       }
 
-      setCurrentUser(userAuth)
+      else setCurrentUser(userAuth)
     })
   }
 
@@ -45,6 +49,7 @@ class App extends React.Component {
   render(){
 
     const url = this.props.history.location.pathname;
+    const {currentUser} = this.props;
 
     return (
       <div className="App">
@@ -56,8 +61,7 @@ class App extends React.Component {
         <Switch>
             <Route exact path='/' component={Homepage} /> 
             <Route exact path='/shop' component={ShopPage} />
-            <Route path='/identity' 
-                  render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInUp />)} /> 
+            <Route path='/identity' render={() => currentUser ? (<Redirect to="/" />) : (<SignInUp />)} /> 
           </Switch>
       </div>
     );
@@ -71,9 +75,11 @@ const mapDispatchToProps = dispatch => ({
 })
 
 
+
 const mapStateToProps = state => ({
   currentUser : state.user.currentUser
 })
 
 
 export default withRouter(connect(mapStateToProps , mapDispatchToProps)(App));
+
