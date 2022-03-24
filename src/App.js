@@ -12,6 +12,7 @@ import { connect } from 'react-redux';
 import {setCurrentUser} from './redux/user/user.actions'
 
 import { Redirect } from 'react-router-dom';
+import { selectCurrentUser } from './redux/user/user.selectors';
 
 
 class App extends React.Component {
@@ -72,12 +73,11 @@ class App extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   setCurrentUser : user => dispatch(setCurrentUser(user))
-})
-
+}) 
 
 
 const mapStateToProps = state => ({
-  currentUser : state.user.currentUser
+  currentUser : selectCurrentUser(state)
 })
 
 
