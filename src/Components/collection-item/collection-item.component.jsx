@@ -7,7 +7,7 @@ import './collection-item.styles.scss'
 
 const CollectionItem = ({item , addItem}) => {
     
-    const {name , price , imageUrl , id} = item
+    const {name , price , imageUrl} = item
     
     return (
 
