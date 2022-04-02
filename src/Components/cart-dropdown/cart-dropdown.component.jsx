@@ -1,15 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux';
-import { selectCartItems, selectCartItemsTotal } from '../../redux/cart/cart.selectors';
+import { selectCartHidden, selectCartItems, selectCartItemsTotal } from '../../redux/cart/cart.selectors';
 import CartItem from '../cart-item/cart-item.component';
 import CustomButton from '../custom-button/custom-button.component';
 
 import emptyCart from '../../Assets/empty-cart.png'
 
 import './cart-dropdown.styles.scss';
+import { withRouter } from 'react-router-dom';
+import { toggleCart } from '../../redux/cart/cart.actions';
 
 
-const CartDropdown = ({cartItems , cartTotalPrice}) => (
+const CartDropdown = ({cartItems , cartTotalPrice , history , match}) => (
     <div className='cart-dropdown'>
         <p className='total'>Total: <span className='total__price'>${cartTotalPrice}</span></p>
         <div className='cart-items'>
@@ -26,14 +28,21 @@ const CartDropdown = ({cartItems , cartTotalPrice}) => (
                 </div>
             }
         </div>
-        <CustomButton>GO TO CHECKOUT</CustomButton>
+        <CustomButton 
+            handleSubmit={() => {
+                history.push(`${match.url}checkout`)}}>GO TO CHECKOUT</CustomButton>
     </div>
 )
 
 
 const mapStateToProps = (state) => ({
     cartItems : selectCartItems(state),
-    cartTotalPrice : selectCartItemsTotal(state)
+    cartTotalPrice : selectCartItemsTotal(state),
+    hidden : selectCartHidden(state)
 })
 
-export default connect(mapStateToProps)(CartDropdown);
+const mapDispatchToProps = dispatch => ({
+    toggleCart : () => dispatch(toggleCart)
+})
+
+export default connect(mapStateToProps , mapDispatchToProps)(withRouter(CartDropdown));
