@@ -1,0 +1,53 @@
+.checkout-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    & > * {
+        margin-top: 25px;
+        width: 50%;
+        text-align: center;
+    }
+
+    &__image-container {
+        display: flex;
+        align-items: center;
+       
+    }
+
+    &__image {
+        width: 100px;
+        border-radius: 20px;
+    }
+
+    &__name {
+        font-family: inherit;
+        font-size: 16px;
+        margin-left: 12px;
+    }
+
+    &__quantity {
+
+        margin-left: 5px;
+
+        & > * {
+            margin-left: 15px;
+        }
+        align-items: center;
+    }
+
+    &__price {
+        
+
+        & > * {
+            margin-left: 15px;
+        }
+    }
+
+    &__remove {
+        color: #d33030;
+        font-size: 18px;
+    }
+
+  
+}

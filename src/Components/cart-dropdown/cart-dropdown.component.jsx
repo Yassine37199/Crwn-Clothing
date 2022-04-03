@@ -29,8 +29,9 @@ const CartDropdown = ({cartItems , cartTotalPrice , history , match}) => (
             }
         </div>
         <CustomButton 
-            handleSubmit={() => {
-                history.push(`${match.url}checkout`)}}>GO TO CHECKOUT</CustomButton>
+            onClick={() => {
+                history.push(`${match.url}checkout`);
+                toggleCart()}}>GO TO CHECKOUT</CustomButton>
     </div>
 )
 
@@ -42,7 +43,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    toggleCart : () => dispatch(toggleCart)
+    toggleCart : () => dispatch(toggleCart())
 })
 
-export default connect(mapStateToProps , mapDispatchToProps)(withRouter(CartDropdown));
+export default withRouter(connect(mapStateToProps , mapDispatchToProps)(CartDropdown));
