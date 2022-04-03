@@ -11,7 +11,7 @@ import { withRouter } from 'react-router-dom';
 import { toggleCart } from '../../redux/cart/cart.actions';
 
 
-const CartDropdown = ({cartItems , cartTotalPrice , history , match}) => (
+const CartDropdown = ({cartItems , cartTotalPrice , history , toggleCart}) => (
     <div className='cart-dropdown'>
         <p className='total'>Total: <span className='total__price'>${cartTotalPrice}</span></p>
         <div className='cart-items'>
@@ -29,8 +29,8 @@ const CartDropdown = ({cartItems , cartTotalPrice , history , match}) => (
             }
         </div>
         <CustomButton 
-            onClick={() => {
-                history.push(`${match.url}checkout`);
+            handleSubmit={() => {
+                history.push('/checkout');
                 toggleCart()}}>GO TO CHECKOUT</CustomButton>
     </div>
 )
