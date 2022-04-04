@@ -29,11 +29,20 @@
     &__quantity {
 
         margin-left: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         & > * {
             margin-left: 15px;
         }
         align-items: center;
+
+        &-add , &-remove {
+            color: #4595fb;
+            cursor: pointer;
+            font-size: 20px;
+        }
     }
 
     &__price {
