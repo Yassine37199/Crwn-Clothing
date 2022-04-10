@@ -11,8 +11,6 @@ import './shop.styles.scss'
 
 
 const ShopPage = ({match}) => {
-
-    console.log(match)
     
         return(
             <Switch>

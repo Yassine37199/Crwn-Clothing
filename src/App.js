@@ -49,7 +49,6 @@ class App extends React.Component {
 
 
   render(){
-    console.log(this.props.match.path)
 
     const url = this.props.history.location.pathname;
     const {currentUser} = this.props;

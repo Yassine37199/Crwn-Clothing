@@ -9,8 +9,13 @@ export const selectShopCollections = createSelector(
     (shop) => shop.collections
 )
 
+export const selectCollectionForPreview = createSelector(
+    [selectShopCollections],
+    (collections) => Object.keys(collections).map(key => collections[key])
+)
+
 
 export const selectShopCollection = (collectionNameParams) => createSelector(
     [selectShopCollections],
-    (collections) => collections.find(collection => collection.title.toLowerCase() === collectionNameParams)
+    (collections) => collections[collectionNameParams]
 )
