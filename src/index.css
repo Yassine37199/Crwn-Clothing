@@ -1,10 +1,15 @@
+@font-face {
+  font-family: "Futura";
+  src: url('./Assets/Fonts/FuturaPTMedium.otf') format("opentype"),
+  }
+
 /* * {
   outline: 1px solid blue;
 } */
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: -apple-system, BlinkMacSystemFont, 'Futura', 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;

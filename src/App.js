@@ -49,6 +49,7 @@ class App extends React.Component {
 
 
   render(){
+    console.log(this.props.match.path)
 
     const url = this.props.history.location.pathname;
     const {currentUser} = this.props;
@@ -62,7 +63,7 @@ class App extends React.Component {
         }
         <Switch>
             <Route exact path='/' component={Homepage} /> 
-            <Route exact path='/shop' component={ShopPage} />
+            <Route path='/shop' component={ShopPage} />
             <Route path='/identity' render={() => currentUser ? (<Redirect to="/" />) : (<SignInUp />)} />
             <Route path='/checkout' component={CheckoutPage} />
           </Switch>
