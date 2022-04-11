@@ -4,7 +4,7 @@ import {auth} from '../../firebase/firebase.utils'
 
 import {ReactComponent as Logo} from '../../Assets/crown.svg'
 
-import './header.styles.scss'
+
 import { connect } from 'react-redux';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
@@ -12,33 +12,32 @@ import { toggleCart } from '../../redux/cart/cart.actions';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { createStructuredSelector } from 'reselect';
+import { HeaderContainer, LogoContainer, NavContainer, NavItemDiv, NavItemLink } from './header.styles';
 
 
 
 const Header = ({currentUser , hidden , toggleCart}) => (
-    <div className='header'>
-        <Link to='/' className='header__logo-box'>
-            <Logo className='header__logo' />
+    <HeaderContainer>
+        <Link to='/'>
+            <LogoContainer/>
         </Link>
-        <div className='header__nav'>
-            <Link to='/shop' className='header__nav-item'>SHOP</Link>
-            <Link to='/' className='header__nav-item'>CONTACT</Link>
-
-
+        <NavContainer>
+            <NavItemLink to='/shop'>SHOP</NavItemLink>
+            <NavItemLink to='/'>CONTACT</NavItemLink>
             {   
                 currentUser ?
-                (<div onClick={() => {
+                (<NavItemDiv onClick={() => {
                     auth.signOut();
-                    window.location.reload()}} className='header__nav-item'>SIGN OUT</div>)
+                    window.location.reload()}}>SIGN OUT</NavItemDiv>)
                 :
-                (<Link to='/identity/login' className='header__nav-item'>SIGN IN</Link>)
+                (<NavItemLink to='/identity/login'>SIGN IN</NavItemLink>)
             }
             <div onClick={toggleCart}>
                 <CartIcon />
             </div>
-        </div>
+        </NavContainer>
         {hidden ? null : <CartDropdown />}
-    </div>
+    </HeaderContainer>
 );
 
 
