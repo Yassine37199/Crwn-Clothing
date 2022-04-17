@@ -6,33 +6,43 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import emptyCart from '../../Assets/empty-cart.png'
 
-import './cart-dropdown.styles.scss';
 import { withRouter } from 'react-router-dom';
 import { toggleCart } from '../../redux/cart/cart.actions';
 
+import { CartDropdownContainer, 
+         CartItemsContainer, 
+         EmptyCartContainer, 
+         EmptyCartImage, 
+         EmptyCartParagraph, 
+         TotalContainer, 
+         TotalPrice } from './cart-dropdown.styles';
+
 
 const CartDropdown = ({cartItems , cartTotalPrice , history , toggleCart}) => (
-    <div className='cart-dropdown'>
-        <p className='total'>Total: <span className='total__price'>${cartTotalPrice}</span></p>
-        <div className='cart-items'>
+    <CartDropdownContainer>
+        <TotalContainer>Total: <TotalPrice>${cartTotalPrice}</TotalPrice></TotalContainer>
+        <CartItemsContainer>
             {
                 cartItems.length ?
                 cartItems.map(({id , ...otherItemProps}) => (
                     <CartItem key={id} {...otherItemProps} />
                 ))
                 :
-                <div className='empty-cart'>
-                    <img src={emptyCart} className='empty-cart__image' alt='empty cart' />
-                    <p className='empty-cart__message'>Your Cart is Empty</p>
-                    <span className='empty-cart__paragraph'>Looks like you haven't added anything to your cart yet</span>
-                </div>
+                <EmptyCartContainer>
+                    <EmptyCartImage src={emptyCart} alt='empty cart' />
+                    <EmptyCartParagraph>Your Cart is Empty</EmptyCartParagraph>
+                    <EmptyCartImage>Looks like you haven't added anything to your cart yet</EmptyCartImage>
+                </EmptyCartContainer>
             }
-        </div>
+        </CartItemsContainer>
         <CustomButton 
+            style={{
+                'padding' : '10px'
+            }}
             handleSubmit={() => {
                 history.push('/checkout');
                 toggleCart()}}>GO TO CHECKOUT</CustomButton>
-    </div>
+    </CartDropdownContainer>
 )
 
 

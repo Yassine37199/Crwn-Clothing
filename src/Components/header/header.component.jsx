@@ -2,9 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {auth} from '../../firebase/firebase.utils'
 
-import {ReactComponent as Logo} from '../../Assets/crown.svg'
-
-
 import { connect } from 'react-redux';
 import CartIcon from '../cart-icon/cart-icon.component';
 import CartDropdown from '../cart-dropdown/cart-dropdown.component';
@@ -12,7 +9,7 @@ import { toggleCart } from '../../redux/cart/cart.actions';
 import { selectCurrentUser } from '../../redux/user/user.selectors';
 import { selectCartHidden } from '../../redux/cart/cart.selectors';
 import { createStructuredSelector } from 'reselect';
-import { HeaderContainer, LogoContainer, NavContainer, NavItemDiv, NavItemLink } from './header.styles';
+import { HeaderContainer, LogoContainer, NavContainer, NavItemLink } from './header.styles';
 
 
 
@@ -26,9 +23,9 @@ const Header = ({currentUser , hidden , toggleCart}) => (
             <NavItemLink to='/'>CONTACT</NavItemLink>
             {   
                 currentUser ?
-                (<NavItemDiv onClick={() => {
+                (<NavItemLink as='div' onClick={() => {
                     auth.signOut();
-                    window.location.reload()}}>SIGN OUT</NavItemDiv>)
+                    window.location.reload()}}>SIGN OUT</NavItemLink>)
                 :
                 (<NavItemLink to='/identity/login'>SIGN IN</NavItemLink>)
             }

@@ -4,18 +4,6 @@ import styled from 'styled-components'
 import { css } from 'styled-components'
 
 
-const NavItemContainerStyles = css`
-
-    font-weight: 900;
-    line-height: 60px;
-    font-size: 16px;
-    text-decoration: none;
-    color: #000;
-    margin-right: 17px;
-    cursor: pointer;
-
-
-`
 
 
 export const HeaderContainer = styled.div`
@@ -41,10 +29,11 @@ export const NavContainer = styled.div`
 
 export const NavItemLink = styled(Link)`
 
-    ${NavItemContainerStyles}
-`
-
-export const NavItemDiv = styled.div`
-
-    ${NavItemContainerStyles}
+    font-weight: 900;
+    line-height: 60px;
+    font-size: 16px;
+    text-decoration: none;
+    color: #000;
+    margin-right: 17px;
+    cursor: pointer;
 `
