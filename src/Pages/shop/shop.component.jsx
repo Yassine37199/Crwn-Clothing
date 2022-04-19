@@ -5,12 +5,9 @@ import { withRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import CollectionOverview from '../../Components/collection-overview/collection-overview.component';
 import CollectionPage from '../collection/collection.component';
-import SignInUp from '../sign-in-up/sign-in-up.component'
-
-import './shop.styles.scss'
 
 
-const ShopPage = ({match}) => {
+const ShopPage = () => {
     
         return(
             <Switch>

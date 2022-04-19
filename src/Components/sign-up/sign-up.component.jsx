@@ -7,8 +7,9 @@ import {ReactComponent as AppleLogo} from '../../Assets/Logos/apple.svg'
 import {ReactComponent as TwitterLogo} from '../../Assets/Logos/twitter.svg'
 import {ReactComponent as FacebookLogo} from '../../Assets/Logos/facebook.svg'
 
-import './sign-up.styles.scss'
 import { auth, createUserProfileDocument } from '../../firebase/firebase.utils';
+import { SignInBrandLogo, SignInButtonOptions, SignInSubtitle } from '../sign-in/sign-in.styles';
+import { SignUpContainer } from './sign-up.styles';
 
 
 
@@ -65,29 +66,29 @@ class SignUp extends Component {
     render() {
         return(
 
-            <div className='sign-up'>
+            <SignUpContainer>
 
-                <p className='sign-up__subtitle'>  SIGN UP WITH ...</p>
-                <div className="sign-up__options">
+                <SignInSubtitle>  SIGN UP WITH ...</SignInSubtitle>
+                <SignInButtonOptions>
                     <CustomButton brand={true}>
-                        <GoogleLogo className='sign-in__brand-logo' />
+                        <SignInBrandLogo as={GoogleLogo} />
                         Google
                     </CustomButton>
                     <CustomButton brand={true}>
-                        <AppleLogo className='sign-in__brand-logo' />
+                        <SignInBrandLogo as={AppleLogo}/>
                         Apple
                     </CustomButton>
                     <CustomButton brand={true}>
-                        <FacebookLogo className='sign-in__brand-logo' />
+                        <SignInBrandLogo as={FacebookLogo} />
                         Facebook
                     </CustomButton>
                     <CustomButton brand={true}>
-                        <TwitterLogo className='sign-in__brand-logo' />
+                        <SignInBrandLogo as={TwitterLogo} />
                         Twitter
                     </CustomButton>
-                </div>
+                </SignInButtonOptions>
                 
-                <p className='sign-up__subtitle'> OR SIGN UP WITH EMAIL</p>
+                <SignInSubtitle> OR SIGN UP WITH EMAIL</SignInSubtitle>
 
                 <FormInput 
                     type="text"
@@ -122,7 +123,7 @@ class SignUp extends Component {
                     required
                 />
                 <CustomButton type="submit" handleSubmit={this.handleSubmit}> JOIN US</CustomButton>
-            </div>
+            </SignUpContainer>
         )
     }
 }

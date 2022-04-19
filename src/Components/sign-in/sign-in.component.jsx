@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
 
@@ -10,8 +9,8 @@ import {ReactComponent as AppleLogo} from '../../Assets/Logos/apple.svg'
 import {ReactComponent as TwitterLogo} from '../../Assets/Logos/twitter.svg'
 import {ReactComponent as FacebookLogo} from '../../Assets/Logos/facebook.svg'
 
-import './sign-in.styles.scss';
 import { auth, signInWithGoogle } from '../../firebase/firebase.utils';
+import { ForgotPasswordLink, SignInBrandLogo, SignInButtonOptions, SignInContainer, SignInSubtitle } from './sign-in.styles';
 
 
 
@@ -58,7 +57,7 @@ class SignIn extends Component {
 
     render() {
         return(
-            <div className='sign-in'>
+            <SignInContainer>
                 <FormInput 
                     type="email"
                     name="email"
@@ -76,29 +75,29 @@ class SignIn extends Component {
                     required
                 />
                 <CustomButton type="submit" handleSubmit={this.handleSubmit}> SIGN IN</CustomButton>
-                <Link to='/' className='sign-in__forgot-pswd'>forgot password ?</Link>
-                <p className='sign-in__subtitle'> OR SIGN IN WITH ...</p>
-                <div className='sign-in__options'>
+                <ForgotPasswordLink to='/'>forgot password ?</ForgotPasswordLink>
+                <SignInSubtitle> OR SIGN IN WITH ...</SignInSubtitle>
+                <SignInButtonOptions>
                     <CustomButton 
                         brand={true}
                         handleSubmit = {signInWithGoogle}>
-                        <GoogleLogo className='sign-in__brand-logo' />
+                        <SignInBrandLogo as={GoogleLogo} />
                         Google
                     </CustomButton>
                     <CustomButton brand={true}>
-                        <AppleLogo className='sign-in__brand-logo' />
+                        <SignInBrandLogo as={AppleLogo} />
                         Apple
                     </CustomButton>
                     <CustomButton brand={true}>
-                        <FacebookLogo className='sign-in__brand-logo' />
+                        <SignInBrandLogo as={FacebookLogo} />
                         Facebook
                     </CustomButton>
                     <CustomButton brand={true}>
-                        <TwitterLogo className='sign-in__brand-logo' />
+                        <SignInBrandLogo as={TwitterLogo} />
                         Twitter
                     </CustomButton>
-                </div>
-            </div>
+                </SignInButtonOptions>
+            </SignInContainer>
         )
     }
 }
