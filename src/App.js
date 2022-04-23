@@ -6,7 +6,7 @@ import Homepage from './Pages/homepage/homepage.component';
 import ShopPage from './Pages/shop/shop.component';
 import SignInUp from './Pages/sign-in-up/sign-in-up.component';
 
-import {auth, createUserProfileDocument, firestore} from './firebase/firebase.utils'
+import {addCollectionAndDocs, auth, createUserProfileDocument, firestore} from './firebase/firebase.utils'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import {setCurrentUser} from './redux/user/user.actions'
@@ -14,6 +14,7 @@ import {setCurrentUser} from './redux/user/user.actions'
 import { Redirect } from 'react-router-dom';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import CheckoutPage from './Pages/checkout/checkout.component';
+import { selectCollectionForPreview } from './redux/shop/shop.selectors';
 
 
 class App extends React.Component {
@@ -39,8 +40,11 @@ class App extends React.Component {
         })
       }
 
-      else setCurrentUser(userAuth)
-    })
+       setCurrentUser(userAuth)
+    });
+
+
+
   }
 
   componentWillUnmount() {
@@ -79,7 +83,8 @@ const mapDispatchToProps = dispatch => ({
 
 
 const mapStateToProps = state => ({
-  currentUser : selectCurrentUser(state)
+  currentUser : selectCurrentUser(state),
+  collectionItems : selectCollectionForPreview(state)
 })
 
 

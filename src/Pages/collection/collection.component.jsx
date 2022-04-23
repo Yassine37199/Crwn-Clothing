@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-import { selectShopCollection } from '../../redux/shop/shop.selectors';
+import {selectShopCollectionByTitle } from '../../redux/shop/shop.selectors';
 
 import CollectionItem from '../../Components/collection-item/collection-item.component'
 import { CollectionItemsContainer, CollectionPageContainer, CollectionPageTitle } from './collection.styles';
 
 const CollectionPage = ({collection}) => {
     
+    console.log(collection)
     const {title , items} = collection;
 
     return (
@@ -25,7 +26,7 @@ const CollectionPage = ({collection}) => {
 };
 
 const mapStateToProps = (state , ownProps) => ({
-    collection : selectShopCollection(ownProps.match.params.categoryName)(state)
+    collection : selectShopCollectionByTitle(ownProps.match.params.categoryName)(state)
 })
 
-export default connect(mapStateToProps)(withRouter(CollectionPage));
+export default connect(mapStateToProps)(withRouter(CollectionPage)); 
