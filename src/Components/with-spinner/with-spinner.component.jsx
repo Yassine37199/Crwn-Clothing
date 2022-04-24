@@ -7,7 +7,7 @@ import { PulseOverlay } from './with-spinner.styles'
 const WithSpinner = WrappedComponent => {
 
     const Spinner = ({isLoading , ...otherProps}) => {
-    return isLoading ? (
+    return isLoading  ? (
         <PulseOverlay>
             <Pulsar 
             size={70}

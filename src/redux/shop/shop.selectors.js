@@ -3,6 +3,10 @@ import { createSelector } from "reselect";
 
 const selectShop = state => state.shop;
 
+export const selectShopFetchingState = createSelector(
+    [selectShop],
+    (shop) => shop.isFetching
+)
 
 export const selectShopCollections = createSelector(
     [selectShop],
@@ -18,4 +22,9 @@ export const selectCollectionForPreview = createSelector(
 export const selectShopCollectionByTitle = (collectionNameParams) => createSelector(
     [selectShopCollections],
     (collections) => collections ? collections[collectionNameParams] : null
+)
+
+export const selectCollectionsLoaded = createSelector(
+    [selectShop],
+    (shop) => !!shop.collections
 )
