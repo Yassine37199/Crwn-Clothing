@@ -4,13 +4,13 @@ import { Switch } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
-import CollectionOverview from '../../Components/collection-overview/collection-overview.component';
+import CollectionOverviewContainer from '../../Components/collection-overview/collection-overview.container';
 import WithSpinner from '../../Components/with-spinner/with-spinner.component';
 import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
-import { selectCollectionsLoaded, selectShopFetchingState } from '../../redux/shop/shop.selectors';
+import { selectCollectionsLoaded } from '../../redux/shop/shop.selectors';
 import CollectionPage from '../collection/collection.component';
+import CollectionContainer from '../collection/collection.container';
 
-const CollectionOverviewWithSpinner = WithSpinner(CollectionOverview);
 const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
 class ShopPage extends Component {
@@ -23,12 +23,11 @@ class ShopPage extends Component {
        
 
     render() {
-        const {isCollectionLoaded} = this.props;
 
         return(
             <Switch>
-                <Route exact path="/shop" render={(props) => <CollectionOverviewWithSpinner isLoading={!isCollectionLoaded} {...props} /> } />
-                <Route path="/shop/:categoryName" render={(props) => <CollectionPageWithSpinner isLoading={!isCollectionLoaded} {...props} />} />
+                <Route exact path="/shop" component={CollectionOverviewContainer} />
+                <Route path="/shop/:categoryName" component={CollectionContainer} />
             </Switch>
         )
     }
