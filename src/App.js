@@ -1,15 +1,13 @@
 import { Route , Switch} from 'react-router-dom';
 import './App.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from './Components/header/header.component';
 import Homepage from './Pages/homepage/homepage.component';
 import ShopPage from './Pages/shop/shop.component';
 import SignInUp from './Pages/sign-in-up/sign-in-up.component';
-
-import {addCollectionAndDocs, auth, createUserProfileDocument, firestore} from './firebase/firebase.utils'
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {setCurrentUser} from './redux/user/user.actions'
+import {fetchUserStartAsync} from './redux/user/user.actions'
 
 import { Redirect } from 'react-router-dom';
 import { selectCurrentUser } from './redux/user/user.selectors';
@@ -17,47 +15,11 @@ import CheckoutPage from './Pages/checkout/checkout.component';
 import { selectCollectionForPreview } from './redux/shop/shop.selectors';
 
 
-class App extends React.Component {
+const App = ({fetchUserStartAsync , currentUser , history}) => {
 
-
-  UnsubscribeFromAuth = null;
-
-  componentDidMount() {
-
-    const {setCurrentUser} = this.props;
-
-    this.UnsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
-
-      if(userAuth) {
-
-        const userRef = await createUserProfileDocument(userAuth);
-
-        userRef.onSnapshot(snapshot => {
-           setCurrentUser({
-                id : snapshot.id,
-                ...snapshot.data()
-            })
-        })
-      }
-
-       setCurrentUser(userAuth)
-    });
-
-
-
-  }
-
-  componentWillUnmount() {
-    this.UnsubscribeFromAuth();
-  }
-
-
-  render(){
-
-    const url = this.props.history.location.pathname;
-    const {currentUser} = this.props;
-
-    return (
+  useEffect(() => fetchUserStartAsync() , [fetchUserStartAsync])
+  const url = history.location.pathname;
+  return(
       <div className="App">
         {   
             !(url.includes('/identity')) ?
@@ -71,14 +33,12 @@ class App extends React.Component {
             <Route path='/checkout' component={CheckoutPage} />
           </Switch>
       </div>
-    );
-
-  }
+    )
   
 }
 
 const mapDispatchToProps = dispatch => ({
-  setCurrentUser : user => dispatch(setCurrentUser(user))
+  fetchUserStartAsync : () => dispatch(fetchUserStartAsync())
 }) 
 
 

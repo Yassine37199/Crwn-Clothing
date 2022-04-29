@@ -1,7 +1,9 @@
 import { UserActionTypes } from "./user.types";
 
 const INITIAL_STATE = {
-    currentUser : null
+    currentUser : null,
+    isLoading : false,
+    errorMessage : ''
 }
 
 
@@ -9,13 +11,21 @@ const INITIAL_STATE = {
 const userReducer = (state = INITIAL_STATE , action) => {
 
     switch (action.type) {
-        case UserActionTypes.SET_CURRENT_USER : {
-            return {
-                ...state,
-                currentUser : action.payload
-            }
-        }
+       case UserActionTypes.FETCH_USER_START : return {
+           ...state,
+           isLoading : true
+       }
 
+       case UserActionTypes.FETCH_USER_SUCCESS : return {
+           currentUser : action.payload,
+           isLoading : false
+       }
+
+       case UserActionTypes.FETCH_USER_FAILURE : return {
+            isLoading : false,
+            errorMessage : action.payload
+       }
+       
         default : return state;
     }
 }

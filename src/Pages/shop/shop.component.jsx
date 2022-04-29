@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Switch } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
@@ -11,18 +11,10 @@ import { selectCollectionsLoaded } from '../../redux/shop/shop.selectors';
 import CollectionPage from '../collection/collection.component';
 import CollectionContainer from '../collection/collection.container';
 
-const CollectionPageWithSpinner = WithSpinner(CollectionPage);
 
-class ShopPage extends Component {
+const ShopPage = ({fetchCollectionStartAsync}) => {
 
-    unsubscribeFromSnapshot = null;
-
-    componentDidMount(){
-        this.props.fetchCollectionStartAsync()
-    }
-       
-
-    render() {
+   useEffect(() => fetchCollectionStartAsync() , [fetchCollectionStartAsync])
 
         return(
             <Switch>
@@ -30,7 +22,7 @@ class ShopPage extends Component {
                 <Route path="/shop/:categoryName" component={CollectionContainer} />
             </Switch>
         )
-    }
+    
 }
 
 const mapStateToProps = createStructuredSelector({

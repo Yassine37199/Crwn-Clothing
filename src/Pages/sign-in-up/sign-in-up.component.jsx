@@ -9,7 +9,7 @@ import SignUp from '../../Components/sign-up/sign-up.component';
 import { withRouter } from 'react-router-dom';
 
 
-const SignInUp = (history , match) => {
+const SignInUp = (history) => {
 
     const pathname = history.location.pathname
 

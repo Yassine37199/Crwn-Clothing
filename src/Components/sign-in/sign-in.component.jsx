@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
 
@@ -14,31 +14,20 @@ import { ForgotPasswordLink, SignInBrandLogo, SignInButtonOptions, SignInContain
 
 
 
-class SignIn extends Component {
+const SignIn = () => {
 
-    constructor(props) {
-        super(props);
 
-        this.state = {
-            email : '',
-            password : ''
-        }
-    }
+    const [email , setEmail] = useState("")
+    const [password , setPassword] = useState("")
 
-    handleSubmit = async e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-
-        const {email , password} = this.state;
-
-        console.log(email , password)
 
         try {
             await auth.signInWithEmailAndPassword(email , password);
             <Redirect to="/" />
-            this.setState({
-                email : '',
-                password : ''
-            }) 
+            setEmail("")
+            setPassword("") 
         }
         catch(error) {
             console.log(error)
@@ -47,34 +36,32 @@ class SignIn extends Component {
          
     }
 
-    handleChange = e => {
+    const handleChange = e => {
         const {value , name} = e.target;
-        
-        this.setState({
-            [name] : value
-        })
+        switch(name){
+            case 'email' : setEmail(value)
+            case 'password' : setPassword(value)
+        }
     }
-
-    render() {
         return(
             <SignInContainer>
                 <FormInput 
                     type="email"
                     name="email"
-                    value={this.state.email}
+                    value={email}
                     label="Email Adress :"
-                    handleChange={this.handleChange}
+                    handleChange={handleChange}
                     required
                 />
                 <FormInput 
                     type="password"
                     name="password"
-                    value={this.state.password}
+                    value={password}
                     label="Password :"
-                    handleChange={this.handleChange}
+                    handleChange={handleChange}
                     required
                 />
-                <CustomButton type="submit" handleSubmit={this.handleSubmit}> SIGN IN</CustomButton>
+                <CustomButton type="submit" handleSubmit={handleSubmit}> SIGN IN</CustomButton>
                 <ForgotPasswordLink to='/'>forgot password ?</ForgotPasswordLink>
                 <SignInSubtitle> OR SIGN IN WITH ...</SignInSubtitle>
                 <SignInButtonOptions>
@@ -100,6 +87,5 @@ class SignIn extends Component {
             </SignInContainer>
         )
     }
-}
 
 export default SignIn;

@@ -1,4 +1,4 @@
-import React , {Component} from 'react'
+import React , {Component, useState} from 'react'
 import CustomButton from '../custom-button/custom-button.component';
 import FormInput from '../form-input/form-input.component';
 
@@ -14,32 +14,27 @@ import { SignUpContainer } from './sign-up.styles';
 
 
 
-class SignUp extends Component {
+const SignUp = () => {
     
-    constructor(props){
-        super(props);
 
-        this.state = {
-
-            displayName : '',
-            email : '',
-            password : '',
-            confirmPassword : ''
-        }
-    }
+   const [userCredentials , setUserCredentials] = useState({
+       email : "",
+       displayName : "",
+       password : "",
+       confirmPassword : ""
+   })
 
 
-    handleChange = e => {
+    const handleChange = e => {
         const {name , value} = e.target;
-
-        this.setState({
+        setUserCredentials({
             [name] : value
         })
     }
 
-    handleSubmit = async e => {
+    const handleSubmit = async e => {
         e.preventDefault();
-        const {displayName , email , password , confirmPassword} = this.state;
+        const {displayName , email , password , confirmPassword} = userCredentials;
         if(password !== confirmPassword) {
             alert("passwords don't match");
             return;
@@ -49,11 +44,11 @@ class SignUp extends Component {
             const {user} = await auth.createUserWithEmailAndPassword(email , password);
 
             await createUserProfileDocument(user , {displayName})
-            this.setState({
-                displayName : '',
-                email : '',
-                password : '',
-                confirmPassword : ''
+            setUserCredentials({
+                email : "",
+                displayName : "",
+                password : "",
+                confirmPassword : ""
             })
         }
 
@@ -62,8 +57,6 @@ class SignUp extends Component {
         }
     }   
 
-
-    render() {
         return(
 
             <SignUpContainer>
@@ -93,39 +86,38 @@ class SignUp extends Component {
                 <FormInput 
                     type="text"
                     name="displayName"
-                    value={this.state.displayName}
+                    value={userCredentials.displayName}
                     label="Display Name :"
-                    handleChange={this.handleChange}
+                    handleChange={handleChange}
                     required
                 />
                 <FormInput 
                     type="email"
                     name="email"
-                    value={this.state.email}
+                    value={userCredentials.email}
                     label="Email Adress :"
-                    handleChange={this.handleChange}
+                    handleChange={handleChange}
                     required
                 />
                 <FormInput 
                     type="password"
                     name="password"
-                    value={this.state.password}
+                    value={userCredentials.password}
                     label="Password :"
-                    handleChange={this.handleChange}
+                    handleChange={handleChange}
                     required
                 />
                 <FormInput 
                     type="password"
                     name="confirmPassword"
-                    value={this.state.confirmPassword}
+                    value={userCredentials.confirmPassword}
                     label="Confirm Password :"
-                    handleChange={this.handleChange}
+                    handleChange={handleChange}
                     required
                 />
-                <CustomButton type="submit" handleSubmit={this.handleSubmit}> JOIN US</CustomButton>
+                <CustomButton type="submit" handleSubmit={handleSubmit}> JOIN US</CustomButton>
             </SignUpContainer>
         )
     }
-}
 
 export default SignUp;
