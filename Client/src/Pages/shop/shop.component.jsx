@@ -5,10 +5,8 @@ import { withRouter } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import CollectionOverviewContainer from '../../Components/collection-overview/collection-overview.container';
-import WithSpinner from '../../Components/with-spinner/with-spinner.component';
 import { fetchCollectionsStartAsync } from '../../redux/shop/shop.actions';
 import { selectCollectionsLoaded } from '../../redux/shop/shop.selectors';
-import CollectionPage from '../collection/collection.component';
 import CollectionContainer from '../collection/collection.container';
 
 
