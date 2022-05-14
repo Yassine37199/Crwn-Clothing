@@ -13,6 +13,7 @@ import { Redirect } from 'react-router-dom';
 import { selectCurrentUser } from './redux/user/user.selectors';
 import CheckoutPage from './Pages/checkout/checkout.component';
 import { selectCollectionForPreview } from './redux/shop/shop.selectors';
+import { GlobalStyle } from './global.styles';
 
 
 const App = ({fetchUserStartAsync , currentUser , history}) => {
@@ -20,7 +21,8 @@ const App = ({fetchUserStartAsync , currentUser , history}) => {
   useEffect(() => fetchUserStartAsync() , [fetchUserStartAsync])
   const url = history.location.pathname;
   return(
-      <div className="App">
+      <>
+        <GlobalStyle />
         {   
             !(url.includes('/identity')) ?
             <Header />
@@ -32,7 +34,7 @@ const App = ({fetchUserStartAsync , currentUser , history}) => {
             <Route path='/identity' render={() => currentUser ? (<Redirect to="/" />) : (<SignInUp />)} />
             <Route path='/checkout' component={CheckoutPage} />
           </Switch>
-      </div>
+      </>
     )
   
 }

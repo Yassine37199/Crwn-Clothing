@@ -23,7 +23,6 @@ export const BackgroundImageContainer = styled.div`
 
 
 export const MenuItemContent = styled.div`
-
     height: 90px;
     padding: 0 25px;
     display: flex;
@@ -93,6 +92,10 @@ export const MenuItemConatiner = styled.div`
         ${MenuItemContent} {
             opacity: 1; 
         }   
+    }
+
+    @media screen and (max-width : 800px) {
+        height : 200px;
     }
 `
 

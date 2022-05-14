@@ -33,7 +33,20 @@ export const CollectionItemConatiner = styled.div`
         width: 80%;
         bottom: 60px;
         display: none;
+
+        @media screen and (max-width : 800px) {
+          display : block;
+          opacity : .9;
+          min-width : unset;
+          padding : 0 10px;
+        }
   
+      }
+
+      @media screen and (max-width : 800px) {
+        width : 40vw;
+        height : 350px;
+      }
       }
 
 
@@ -74,4 +87,6 @@ export const CollectionItemPrice = styled.span`
     width: 10%;
 
 `
+
+
 

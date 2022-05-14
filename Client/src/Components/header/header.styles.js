@@ -13,10 +13,21 @@ export const HeaderContainer = styled.div`
     align-items: center;
     font-family: 'Futura' , sans-serif;
 
+    @media screen and (max-width : 800px) {
+        padding : 10px;
+        height : 60px;
+        margin-bottom : 20px;
+    }
+
 `
 
 export const LogoContainer = styled(Logo)`
     padding: 15px 20px;
+
+    @media screen and (max-width : 800px) {
+        width : 40px;
+        padding : 0
+    }
 `
 
 export const NavContainer = styled.div`
@@ -24,6 +35,9 @@ export const NavContainer = styled.div`
     justify-content: center;
     align-items: center;
     padding: 15px 25px;
+
+    @media screen and (max-width : 800px) { 
+    }
 
 `
 
@@ -36,4 +50,9 @@ export const NavItemLink = styled(Link)`
     color: #000;
     margin-right: 17px;
     cursor: pointer;
+
+    @media screen and (max-width : 800px) {
+        font-size : 14px;
+
+     }
 `
